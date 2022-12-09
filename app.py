@@ -33,7 +33,7 @@ st.markdown(
         Generate your and other people's **Twitter Wrapped 2022** - an overview of a Twitter account's most liked Tweet authors for this year (inspired by [Spotify Wrapped](https://spotify.com/wrapped)). You can find the code for this mini-app on [GitHub](https://github.com/kinosal/twitter-wrapped) and the author on [Twitter](https://twitter.com/kinosal).
     """
 )
-account = st.text_input(label="Twitter account")
+account = st.text_input(label="Twitter account handle")
 if account:
     logging.info(f"Account: {account}")
     top_authors = top_authors(account=account)
