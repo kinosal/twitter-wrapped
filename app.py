@@ -5,13 +5,13 @@ import logging
 
 # Import 3rd party libraries
 import streamlit as st
+import streamlit.components.v1 as components
 
 # Import modules
 import twitter as twi
 
 # Configure logger
 logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.INFO, force=True)
-
 
 # Define functions
 @st.experimental_memo(ttl=3600, show_spinner=False)
@@ -24,9 +24,23 @@ def top_authors(account: str) -> list:
     return []
 
 
-# Render Streamlit page
+# Configure Streamlit page and state
 st.set_page_config(page_title="Twitter Wrapped", page_icon="🤖")
 
+# Force responsive layout for columns also on mobile
+st.write(
+    """<style>
+    @media (max-width: 480px) {
+        [data-testid="column"] {
+            min-width: calc(9% - 1rem);
+            padding: 0 0.2rem;
+        }
+    }
+    </style>""",
+    unsafe_allow_html=True,
+)
+
+# Render Streamlit page
 st.title("Twitter Wrapped")
 st.markdown(
     """
@@ -48,14 +62,37 @@ if account:
         for i, author in enumerate(top_authors):
             cols = st.columns([1, 2, 13])
             cols[0].markdown(f"**{i + 1}**")
-            cols[1].image(author[0][1], width=40)
+            cols[1].image(author[0][1], width=35)
             cols[2].markdown(
                 f"**[@{author[0][0]}](https://twitter.com/{author[0][0]})**"
             )
         cols = st.columns([1, 15])
-        cols[0].image("twitter.png", width=30)
+        cols[0].image("twitter.png", width=25)
         cols[1].markdown(
             """Made with [twitter-likes.streamlit.app](https://twitter-likes.streamlit.app)"""
         )
         logging.info(f"Top authors: {', '.join([a[0][0] for a in top_authors])}")
+
         st.markdown("""---""")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown(
+                "**Other Streamlit apps by [@kinosal](https://twitter.com/kinosal)**"
+            )
+            st.markdown("[Tweet Generator](https://tweets.streamlit.app)")
+            st.markdown("[Content Summarizer](https://web-summarizer.streamlit.app)")
+            st.markdown("[Code Translator](https://english-to-code.streamlit.app)")
+            st.markdown("[PDF Analyzer](https://pdf-keywords.streamlit.app)")
+        with col2:
+            st.write("If you like this app, please consider to")
+            components.html(
+                """
+                    <form action="https://www.paypal.com/donate" method="post" target="_top">
+                    <input type="hidden" name="hosted_button_id" value="8JJTGY95URQCQ" />
+                    <input type="image" src="https://pics.paypal.com/00/s/MDY0MzZhODAtNGI0MC00ZmU5LWI3ODYtZTY5YTcxOTNlMjRm/file.PNG" height="35" border="0" name="submit" title="Donate with PayPal" alt="Donate with PayPal button" />
+                    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+                    </form>
+                """,
+                height=45,
+            )
+            st.write("so I can keep it alive. Thank you!")
