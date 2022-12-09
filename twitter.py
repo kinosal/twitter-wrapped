@@ -45,6 +45,10 @@ class Twitter:
             logging.error(str(e).split("\n")[0])
             st.error("Account not found")
             return []
+        except tweepy.errors.Unauthorized as e:
+            logging.error(str(e).split("\n")[0])
+            st.error("Unauthorized")
+            return []
         except Exception as e:
             logging.error(e)
             return []
