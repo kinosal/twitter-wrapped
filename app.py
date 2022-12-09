@@ -33,8 +33,8 @@ st.markdown(
     """
 )
 account = st.text_input(label="Twitter account")
-logging.info(f"Account: {account}")
 if account:
+    logging.info(f"Account: {account}")
     top_authors = top_authors(account=account)
     if top_authors:
         st.markdown("""---""")
@@ -54,7 +54,7 @@ if account:
         cols = st.columns([1, 15])
         cols[0].image("twitter.png", width=30)
         cols[1].markdown(
-            """Made with [twitter-wrapped.streamlit.app](https://twitter-wrapped.streamlit.app)"""
+            """Made with [twitter-likes.streamlit.app](https://twitter-likes.streamlit.app)"""
         )
         logging.info(f"Top authors: {', '.join([a[0][0] for a in top_authors])}")
         st.markdown("""---""")

@@ -1,6 +1,6 @@
 # Twitter Wrapped
 
-Live version of this app at [twitter-wrapped.streamlit.app](https://twitter-wrapped.streamlit.app)
+Live version of this app at [twitter-likes.streamlit.app](https://twitter-likes.streamlit.app)
 
 ## Description
 
