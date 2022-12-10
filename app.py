@@ -47,7 +47,7 @@ st.markdown(
         Generate your and other people's **Twitter Wrapped 2022** - an overview of a Twitter account's most liked Tweet authors for this year (inspired by [Spotify Wrapped](https://spotify.com/wrapped)). You can find the code for this mini-app on [GitHub](https://github.com/kinosal/twitter-wrapped) and the author on [Twitter](https://twitter.com/kinosal).
     """
 )
-account = st.text_input(label="Twitter account handle")
+account = st.text_input(label="Twitter account handle").replace("@", "")
 if account:
     logging.info(f"Account: {account}")
     top_authors = top_authors(account=account)
@@ -56,7 +56,7 @@ if account:
         st.markdown(
             f"""
                 **#TwitterWrapped 2022**\n
-                Top authors for [@{account.replace("@", "")}](https://twitter.com/{account})
+                Top authors for [@{account}](https://twitter.com/{account})
             """
         )
         for i, author in enumerate(top_authors):
@@ -72,6 +72,18 @@ if account:
             """Made with [twitter-likes.streamlit.app](https://twitter-likes.streamlit.app)"""
         )
         logging.info(f"Top authors: {', '.join([a[0][0] for a in top_authors])}")
+
+        st.markdown("""---""")
+        formatted_top_authors = "\n".join(
+            [f"{i+1}) @{a[0][0]} " for i, a in enumerate(top_authors)]
+        )
+        st.markdown("Share your result on Twitter (add a screenshot  of the above list as image if you like):")
+        components.html(
+            f"""
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="#TwitterWrapped 2022\n\n@{account}'s most liked accounts:\n{formatted_top_authors}\n\nMade with" data-url="twitter-likes.streamlit.app" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            """,
+            height=40,
+        )
 
         st.markdown("""---""")
         col1, col2 = st.columns(2)
