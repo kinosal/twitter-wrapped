@@ -77,7 +77,7 @@ if account:
         formatted_top_authors = "\n".join(
             [f"{i+1}) @{a[0][0]} " for i, a in enumerate(top_authors)]
         )
-        st.markdown("Share your result on Twitter (add a screenshot  of the above list as image if you like):")
+        st.markdown("**Share your result**")
         components.html(
             f"""
                 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="#TwitterWrapped 2022\n\n@{account}'s most liked accounts:\n{formatted_top_authors}\n\nMade with" data-url="twitter-likes.streamlit.app" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

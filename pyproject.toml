@@ -6,13 +6,13 @@ authors = ["Nikolas Schriefer <info@nikolasschriefer.de>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-tweepy = "^4.12.1"
-streamlit = "^1.15.2"
+tweepy = "^4.12"
+streamlit = "^1.15"
 
 [tool.poetry.dev-dependencies]
-pycodestyle = "^2.10.0"
-flake8 = "^6.0.0"
-black = "^22.10.0"
+pycodestyle = "^2.10"
+flake8 = "^6.0"
+black = "^22.10"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
