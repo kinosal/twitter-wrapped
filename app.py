@@ -13,11 +13,12 @@ import twitter as twi
 # Configure logger
 logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.INFO, force=True)
 
+
 # Define functions
 @st.experimental_memo(ttl=60*60*12, show_spinner=False)
 def top_authors(account: str) -> list:
     twitter = twi.Twitter(account=account)
-    likes = twitter.fetch_all_likes_since(since="2022-01-01")
+    likes = twitter.fetch_all_likes_since(since="2022-01-01", until="2022-12-31")
     if likes:
         logging.info(f"Likes: {len(likes)}")
         return twitter.get_liked_authors(likes=likes, number=5)

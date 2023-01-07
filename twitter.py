@@ -53,8 +53,8 @@ class Twitter:
             logging.error(e)
             return []
 
-    def fetch_all_likes_since(self, since: str) -> list:
-        """Fetch all likes since a date for an account."""
+    def fetch_all_likes_since(self, since: str, until: str) -> list:
+        """Fetch all likes between two dates for an account."""
         likes = self.fetch_likes()
         if not likes:
             return []
@@ -76,6 +76,7 @@ class Twitter:
             like
             for like in likes
             if like.created_at >= utc.localize(datetime.fromisoformat(since))
+            and like.created_at <= utc.localize(datetime.fromisoformat(until))
         ]
 
     @staticmethod
