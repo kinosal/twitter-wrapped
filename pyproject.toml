@@ -5,15 +5,15 @@ description = ""
 authors = ["Nikolas Schriefer <info@nikolasschriefer.de>"]
 
 [tool.poetry.dependencies]
-python = "^3.10.9"
+python = "^3.10"
 tweepy = "^4.12"
 streamlit = "^1.15"
 
 [tool.poetry.dev-dependencies]
 pycodestyle = "^2.10"
 flake8 = "^6.0"
-black = "^22.10"
-watchdog = "^2.2"
+black = "^23.12"
+watchdog = "^3.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

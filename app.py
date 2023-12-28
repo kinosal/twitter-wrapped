@@ -15,7 +15,7 @@ logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.INFO, forc
 
 
 # Define functions
-@st.experimental_memo(ttl=60*60*12, show_spinner=False)
+@st.cache_data(ttl=60*60*12, show_spinner=False)
 def top_authors(account: str) -> list:
     twitter = twi.Twitter(account=account)
     likes = twitter.fetch_all_likes_since(since="2022-01-01", until="2022-12-31")
@@ -43,12 +43,21 @@ st.write(
 
 # Render Streamlit page
 st.title("Twitter Wrapped")
+
 st.markdown(
     """
-        Generate your and other people's **Twitter Wrapped 2022** - an overview of a Twitter account's most liked Tweet authors for this year (inspired by [Spotify Wrapped](https://spotify.com/wrapped)). You can find the code for this mini-app on [GitHub](https://github.com/kinosal/twitter-wrapped) and the author on [Twitter](https://twitter.com/kinosal).
+        Unfortunately, Twitter - now X - doesn't provide free access to their API anymore. Hence, this app stopped working.
     """
 )
-account = st.text_input(label="Twitter account handle").replace("@", "")
+
+# st.markdown(
+#     """  
+#         Generate your and other people's **Twitter Wrapped 2022** - an overview of a Twitter account's most liked Tweet authors for this year (inspired by [Spotify Wrapped](https://spotify.com/wrapped)). You can find the code for this mini-app on [GitHub](https://github.com/kinosal/twitter-wrapped) and the author on [Twitter](https://twitter.com/kinosal).
+#     """
+# )
+
+account = None
+# account = st.text_input(label="Twitter account handle").replace("@", "")
 if account:
     logging.info(f"Account: {account}")
     top_authors = top_authors(account=account)
@@ -86,26 +95,26 @@ if account:
             height=40,
         )
 
-        st.markdown("""---""")
-        col1, col2 = st.columns(2)
-        with col1:
-            st.markdown(
-                "**Other Streamlit apps by [@kinosal](https://twitter.com/kinosal)**"
-            )
-            st.markdown("[Tweet Generator](https://tweets.streamlit.app)")
-            st.markdown("[Content Summarizer](https://web-summarizer.streamlit.app)")
-            st.markdown("[Code Translator](https://english-to-code.streamlit.app)")
-            st.markdown("[PDF Analyzer](https://pdf-keywords.streamlit.app)")
-        with col2:
-            st.write("If you like this app, please consider to")
-            components.html(
-                """
-                    <form action="https://www.paypal.com/donate" method="post" target="_top">
-                    <input type="hidden" name="hosted_button_id" value="8JJTGY95URQCQ" />
-                    <input type="image" src="https://pics.paypal.com/00/s/MDY0MzZhODAtNGI0MC00ZmU5LWI3ODYtZTY5YTcxOTNlMjRm/file.PNG" height="35" border="0" name="submit" title="Donate with PayPal" alt="Donate with PayPal button" />
-                    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-                    </form>
-                """,
-                height=45,
-            )
-            st.write("so I can keep it alive. Thank you!")
+st.markdown("""---""")
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown(
+        "**Other Streamlit apps by [@kinosal](https://twitter.com/kinosal)**"
+    )
+    st.markdown("[Tweet Generator](https://tweets.streamlit.app)")
+    st.markdown("[Content Summarizer](https://web-summarizer.streamlit.app)")
+    st.markdown("[Code Translator](https://english-to-code.streamlit.app)")
+    st.markdown("[PDF Analyzer](https://pdf-keywords.streamlit.app)")
+# with col2:
+#     st.write("If you like this app, please consider to")
+#     components.html(
+#         """
+#             <form action="https://www.paypal.com/donate" method="post" target="_top">
+#             <input type="hidden" name="hosted_button_id" value="8JJTGY95URQCQ" />
+#             <input type="image" src="https://pics.paypal.com/00/s/MDY0MzZhODAtNGI0MC00ZmU5LWI3ODYtZTY5YTcxOTNlMjRm/file.PNG" height="35" border="0" name="submit" title="Donate with PayPal" alt="Donate with PayPal button" />
+#             <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+#             </form>
+#         """,
+#         height=45,
+#     )
+#     st.write("so I can keep it alive. Thank you!")
